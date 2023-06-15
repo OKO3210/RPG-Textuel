@@ -1,0 +1,1369 @@
+#Variable qui doivent être au début du jeu
+inventory = {
+    "Armes" : {
+        "Une epée en fer" : 1,
+        "Un arc en bois" : 1,
+        "Des flèches" : 15
+    },
+    "Potions" : {
+        "Potion de mana" : 10,
+        "Potion de soin" : 15,
+        "Potion d'armure" : 9,
+        "Potion de force" : 3
+    },
+    "Armures" : {
+        "plastron en cuivre" : 1,
+        "jambière en cuivre" : 1
+        
+        },
+
+      "livre de quête" : {
+          
+
+      },
+
+    "carte" : 1,
+
+    "le guide des aventuriers" : 1
+
+  }
+
+Vie = 100
+Armure = 75
+Mana = 100
+Piece_or = 10
+attaque_arc = 25
+attaque_epee = 20
+degat_magique = 50
+une_potion = 0
+level = 1
+XP = 0
+Barre_Xp = 100
+Vie_max = 100
+Mana_max = 100
+#Map
+# 0 = Passe R
+#1 Goblin
+#2 Goblin soldat
+#3 Chef Goblin
+#4 boss goblin
+#5 skelette
+#6 guerrier skelette
+#7 boss skelette
+#8 panther ombre
+#9 boss panther ombre alpha
+#10 Marchand
+#11 Sorcier
+#12 Villageois Quête
+#13 Quête Annulé
+#14 Coffre zone facile
+#15 Coffre zone facile
+#16 Coffre zone facile
+#17 Coffre zone moyen
+#18 Coffre zone moyen
+#19 Coffre zone difficile
+#20 Bordure sud
+#21 Bordure nord
+#22 Bordure ouest
+#23 Bordure est
+#24 Bordure nord est
+#25 Bordure nord ouest
+#26 Bordure sud est
+#27 Bordure sud ouest
+#30 goblin géant
+#31 skelette géant
+#32 panther géant
+#33 boss finale
+#34 boss secret
+#x = , y = 21 : apparition 
+#P passage zone
+L = [                                                                                                                                                                                      # y
+   [25,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21, 21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,24],  # 0
+   [22,34, 0,32, 0, 0, 0,30, 0, 0,30, 0, 0,32, 0,31, 0, 0, 0,32, 0, 0,31, 0, 0,31, 0,30, 0,  5, 5, 0, 0, 6, 0, 0, 5, 0, 0, 3, 0, 0,10, 0, 0, 6, 5, 0, 5, 0, 6, 5, 0, 0, 5,10, 0, 0,31,21],  # 1
+   [22, 0, 0, 0, 0,32, 0,31, 0, 0, 0, 0, 0, 0,31, 0, 0, 0,30, 0, 0,31, 0,30, 0, 0, 0,32, 0,  6,10, 5, 6, 0, 6, 0, 6, 0,10, 0, 6, 0, 0, 0,18, 0, 0, 0, 3, 0, 0, 6, 5, 0, 0, 3, 0, 5, 0,21],  # 2
+   [22,31, 0,30, 0,32, 0, 0, 0, 0, 0,32, 0, 0, 0, 0,31, 0, 0,31, 0, 0,30, 0, 0,32, 0, 0,32,  0, 0, 0, 6,10, 3, 0, 0, 6, 0, 0, 5, 0, 6, 0, 0, 6, 6, 0, 0,10, 0, 6, 0,10, 6, 0, 0, 0, 0,21],  # 3
+   [22, 0, 0,32, 0, 0, 0,33,33, 0,31, 0, 0,31, 0, 0, 0, 0, 0, 0, 0, 0,32, 0,31, 0, 0, 0, 0,  0, 5, 0, 0, 6, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 6, 0, 6, 0, 0, 5, 0, 0, 5, 3,21],  # 4
+   [22, 0, 0, 0,32, 0, 0,33,33, 0, 0, 0,32, 0, 0, 0,31, 0, 0,30, 0, 0, 0, 0, 0, 0,30, 0,32,  6, 0, 0, 5, 0, 6, 0, 6, 5, 0, 0, 5, 0, 5, 5, 0, 0, 6, 0, 0, 5, 0, 0, 0, 0, 0, 0, 6, 0, 0,21],  # 5
+   [22, 0,31, 0,30, 0, 0, 0, 0, 0,31, 0, 0,32, 0, 0, 0,32, 0, 0,30, 0, 0, 0,32, 0, 0, 0, 0,  0, 0,11, 0, 0, 0, 5, 0, 0, 0, 0, 0,11, 0, 0,10, 0, 5, 0, 0, 0, 0, 6, 0, 5, 0, 0, 6, 0, 5,21],  # 6
+   [22,31, 0, 0, 0,31, 0, 0,30, 0, 0,31, 0, 0,31, 0, 0,31, 0,32, 0, 0,30, 0, 0,31, 0, 0, 0,  0, 0, 6, 0, 6, 6, 0, 6, 0, 3, 0, 5, 0, 6, 0, 6, 5, 0, 0, 0, 3, 7, 0,10, 0, 0, 0, 0, 5, 5,21],  # 7
+   [22, 0, 0,32, 0, 0, 0, 0,30, 0, 0,30, 0,31, 0,31, 0, 0, 0, 0,31, 0, 0,30, 0, 0,31, 0,31,  6,11, 0, 6, 0, 0, 5, 0, 6, 5, 0, 3, 0, 0, 0, 0, 0, 0,11, 0, 0, 0, 6, 0, 3, 0, 6, 0, 0, 0,21],  # 8
+   [22, 0, 0, 0, 0, 0,32,11,10,31, 0, 0, 0, 0, 0,31, 0, 0, 0,31, 0, 0, 0,30, 0, 0, 0,31, 0,  0, 0, 0, 0,11, 6, 0, 0, 3, 0, 0, 0, 6, 0, 0, 5, 0, 6, 0, 5, 0, 0, 0, 5, 0, 0, 6, 0, 0, 5,21],  # 9
+   [22,31, 0,30, 0, 0, 0, 0,31, 0, 0,32, 0, 0, 0,30, 0,32, 0, 0, 0, 0,32, 0, 0,30, 0, 0, 0,  0,11, 6, 0, 0, 0, 5, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 6, 0, 0, 5, 0, 0, 5, 0, 0,21],  # 10
+   [22, 0, 0,30, 0,31, 0, 0,32, 0, 0, 0,31, 0, 0, 0, 0,31, 0, 0,32, 0,30, 0, 0, 0, 0,30, 0,  6, 0, 0, 0, 5, 0, 0, 3, 3, 0, 0, 5, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 6, 0,21],  # 11
+   [22, 0, 0, 0,32, 0, 0, 0, 0, 0,31, 0, 0, 0,32, 0, 0, 0,31, 0,30, 0, 0,30, 0, 0, 0, 0,31,  0, 5, 6,10, 0, 0,10, 6, 0, 0, 5, 0, 5, 0, 5, 0, 0, 6, 0, 0, 3, 0, 0, 6, 0, 6, 0, 0, 0, 0,21],  # 12
+   [22,31, 0,30, 0, 0, 0,30, 0, 0, 0, 0,30, 0, 0, 0, 0,32, 0, 0, 0, 0, 0, 0, 0,32, 0, 0, 0,  0,10, 0, 6, 0, 5, 0, 5, 0, 0, 6, 0, 0, 5, 5, 0, 0, 0, 6, 0, 0, 6, 0, 0, 0, 0, 0, 3, 0, 0,21],  # 13
+   [22, 0, 0, 0, 0, 0, 0, 0, 0,30, 0,32, 0,32, 0, 0,30, 0, 0, 0,30, 0, 0,30, 0, 0, 0, 0,31,  6, 0, 5, 0, 0, 0, 0, 0, 3, 0, 0, 5, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0,17, 0, 0, 0, 0, 6,21],  # 14
+   [22, 0,30, 0,32, 0,31, 0, 0, 0,31, 0, 0, 0,31, 0, 0, 0, 0, 0,31, 0,32, 0, 0, 0,30, 0, 0,  0, 5, 0, 0,11, 0, 0,11, 0, 5, 6, 0, 0, 0, 0, 5, 0, 5, 0, 6, 0, 6, 0, 0, 0, 0,11, 0, 0, 0,21],  # 15
+   [22, 0, 0, 0,31, 0, 0, 0, 0,32, 0, 0,32, 0, 0,31, 0, 0,32, 0, 0, 0,30, 0,31, 0, 0, 0,32,  0, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 5,10, 0, 6, 6, 0, 0, 6, 6, 0, 5, 6, 0, 0, 5, 0, 6, 0,21],  # 16
+   [22,31, 0, 0,30, 0, 0,31, 0, 0, 0, 0, 0, 0, 0, 0,31, 0, 0, 0, 0, 0,32, 0, 0, 0,30, 0, 0,  0, 5, 6, 0, 0, 0, 5, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 6, 0,11, 6, 0, 0, 5, 0, 0, 0, 0,21],  # 17
+   [22, 0,32, 0, 0, 0, 0, 0, 0,31, 0, 0, 0,30, 0, 0,32, 0, 0,31, 0,30, 0, 0,31, 0,30, 0,32,  0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 6, 0, 5, 0, 5, 0, 0, 6, 0, 6, 0, 0, 5, 0, 0, 0, 5, 0, 0,21],  # 18
+   [22, 0, 0,30, 0, 0,31, 0, 0, 0, 0,32, 0, 0,30, 0, 0,32, 0, 0, 0,30, 0, 0,31, 0, 0,30, 0,  0, 0, 0, 0, 0, 0, 0, 3, 0, 5, 6, 0, 0, 6, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0,21],  # 19
+                                                                                                                                                                                            # P
+   [22, 8, 6, 8, 0, 6, 0, 6, 0, 0, 8, 0, 8, 0, 8, 0, 0, 8, 8, 0, 8, 0, 8, 8, 0, 0, 0, 0, 0,  11, 0, 0, 0, 0, 0, 3, 2, 0, 2, 0, 0, 2, 1, 0, 1, 1, 0, 0, 0, 0, 1,11, 0, 3, 0, 0, 0, 2,30,21],  # 20
+   [22, 0, 0, 0, 0,10, 0, 8,11, 0, 8, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 8, 0, 0, 8, 0, 0,10, 0,  0,12, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 0, 1, 0, 0, 1, 0, 0, 3, 0, 3,21],  # 21
+   [22, 8, 8, 6, 8, 0, 8, 0, 8, 8, 0, 8, 0, 0, 8, 8, 0, 0, 0, 8,10, 0, 6, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 1, 2, 0, 0, 0,10, 3, 0, 0, 1, 0,10, 0, 2, 0, 0, 0,21],  # 22
+   [22, 0, 8, 6, 0, 6, 0, 0, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0,  0, 0, 0, 0, 0,10, 0, 1, 2, 0, 0, 0, 2, 1, 0, 0, 0, 1, 0, 0, 3, 2, 0, 2, 0, 2, 0, 3, 0, 2,21],  # 23
+   [22, 8, 0, 0, 8, 8, 0, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0,10, 0, 0, 0, 0,  0, 0, 0,10, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,11, 0, 0, 0, 2,21],  # 24
+   [22, 0, 8, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 6, 8, 8, 0, 0, 8, 0, 8, 8, 0, 0,  0, 0, 1, 1, 0, 0, 3, 1, 0, 0,11, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0,14, 0,21],  # 25
+   [22, 0, 0, 0, 0, 0, 0, 8, 0, 0, 8, 0, 0, 0, 8, 0, 0, 8, 0, 0, 8, 0, 8, 0, 8, 0, 0, 0, 0,  0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 2, 0, 2, 0, 0, 1, 0, 2, 0, 1, 3,21],  # 26
+   [22, 0, 8, 8, 0, 8, 0, 0,11, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 8, 0, 8, 8,  0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0,10, 3, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0,21],  # 27
+   [22, 8, 0, 0, 0, 6, 0, 0, 8, 0, 6, 0, 6, 0, 8, 0, 0, 0, 0, 0, 6, 0, 8, 8, 0, 0, 6, 0, 8,  1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 1, 0, 0, 1, 2, 0, 1, 0, 0, 3, 3, 2, 0, 1, 0, 0, 3, 0, 0,21],  # 28
+   [22, 8, 0, 0, 8, 6,10, 0, 8, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 0, 8, 0, 0, 8, 0, 8, 0, 8, 0,  0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 3, 2, 0, 0, 0, 0, 0, 1, 2,21],  # 29
+   [22, 0, 0, 6, 0, 0, 0, 8, 0, 0, 6, 0, 0, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 0, 6, 0, 0, 8,  2, 0, 3, 0, 1, 0, 0, 0, 0, 2, 0, 1, 2, 0, 0, 2, 0, 0, 3, 0, 0, 0, 3, 0,11, 1, 0, 1, 0, 0,21],  # 30
+   [22, 8, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 0, 0, 8, 0, 0, 8, 0, 0, 8, 0, 8, 0,  0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,11, 2, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 3, 0, 0, 2, 0,21],  # 31
+   [22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0,11, 0, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8,  3, 0, 0, 3, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2,10, 0, 0, 0, 0, 3, 1, 0, 0, 1, 2, 0,21],  # 32
+   [22, 8, 6, 0, 0, 0, 0, 8, 0, 8, 0, 0, 0, 8, 6, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0,  0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 3, 2,21],  # 33
+   [22, 0, 0, 0, 8, 0, 8, 0, 0, 0, 1, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 8, 0, 0, 0, 0, 0, 8,  0, 0, 1, 1, 0, 0, 0, 3, 0, 0,15, 0, 0, 0,11, 2, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0,21],  # 34
+   [22, 8,10, 6, 0, 0, 0, 9, 8, 0, 0, 0, 0, 8, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0,  0, 1, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 3, 2, 0, 0,21],  # 35
+   [22, 0, 8, 0, 0, 0, 8, 0,11, 0, 0, 0, 8, 0, 8, 0, 8, 8, 0, 8, 0, 8, 0, 0, 0, 0, 0, 0, 8,  0, 0, 1, 0, 0, 3, 0, 0, 2, 0, 0, 0, 1, 0, 0, 3, 0, 3, 0, 3, 0,10, 3, 0, 2, 0, 0, 0, 0, 2,21],  # 36
+   [22, 0, 0, 8, 0, 0, 0, 8, 0, 8, 6, 0, 8, 8, 6, 8, 0, 0, 6, 8, 0, 0, 8, 0, 6, 0, 0, 8, 0,  1, 0, 2, 0, 3, 0, 0, 0, 0, 0, 3, 0, 2, 0, 0, 1, 0, 2, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,21],  # 37
+   [22,32, 0, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,  0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0, 0, 2, 0, 0,16,21],  # 38
+   [27,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,19,20,20,20,20,20,20,20, 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,26]   # 39
+
+]
+#x = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28, 29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59
+                                                                                          #P
+x = 29
+y = 21
+
+current_position = L[y][x]
+
+
+import time
+import sys
+import random
+def Menu(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max):
+  print("""
+  1.Nouvelle partie
+  2.Crédits
+  3.Exit/Quitter
+  """)
+  reponse_menu = int(input("Veuillez choisir le chiffre qui vous correspond "))
+  while reponse_menu != 1 and reponse_menu != 2 and reponse_menu != 3 and reponse_menu != 4:
+    print("Réponse invalide veillez donner un chiffre correct")
+    reponse_menu = int(input())
+
+  if reponse_menu == 1:
+    start_game(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+
+  elif reponse_menu == 2:
+    credit()
+    Menu(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+    
+  elif reponse_menu == 3:
+    print("Etes-vous sûr ?") 
+    rep = input()
+
+    if rep == "Oui" or rep == "oui":
+      sys.exit("Merci d'avoir jouer, à la prochaine !")
+
+    else:
+      print("Ok amusez-vous bien !")
+      Menu(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      
+def start_game(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max):
+  player_name = ask_name()
+  print("ok", player_name, "c'est à toi de jouer")
+  print("Le roi démon et c'est serviteur on envahit la Terre, tu fait parti des rare personne qui sont partis à l'aventure pour essayer de sauver le monde du chaos du roi démon")
+  time.sleep(3.0)
+  while Vie != 0:
+    current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = choice(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+  
+
+
+def ask_name():
+  print("Quelle est votre nom héros ?")
+  name = input()
+  return name
+
+def choice(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max):
+  print("""Que veut tu faire ?
+  1. Aller dans une direction
+  2. Ouvrir votre inventaire
+  3. Voir votre état
+  """)
+  choix = int(input())
+  while choix != 1 and choix != 2 and choix != 3:
+    print("Réponse invalide veillez donner un chiffre correct")
+    choix = int(input())
+  if choix == 1:
+    current_position, x, y = move(current_position, x, y)
+
+    if current_position == 0:
+      print("Il n'y a rien d'anormale ici")
+
+    elif current_position < 10 and current_position >= 1:
+      current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = interraction_monstre(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      L[y][x] = 0
+      Piece_or = Piece_or + 5
+    elif current_position < 20 and current_position >= 10:
+      current_position ,Piece_or = interraction_pacifique(current_position, Piece_or)
+    elif current_position < 30 and current_position >=20:
+      current_position = interraction_bordure(current_position)
+    elif current_position >= 30:
+      current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = interraction_extreme(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+
+    return current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+  if choix == 2:
+    print('Vous possédez actuellement des:')
+    for key, value in inventory.items():
+      print(key)
+    Vie, Mana, Armure = choix_inventaire(Vie, Mana, Armure, x, y)
+    return current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+  if choix == 3:
+    etat(Vie, Mana, Armure, attaque_arc, attaque_epee, Piece_or, degat_magique, level, XP, Barre_Xp)
+    return current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+def choix_inventaire(Vie, Mana, Armure, x, y):
+  print("""Que faites vous ?:
+  1- Vous regardez vos armes
+  2- Vous regardez vos potions
+  3- Vous regardez votre armure
+  4- Vous regardez vos quêtes
+  5- Vous regardez votre carte
+  6- Vous Quittez votre inventaire
+  7- Vous regarder « le guide des aventuriers »""")
+
+  reponse_inventaire = int(input())
+
+  while reponse_inventaire != 1 and reponse_inventaire != 2 and reponse_inventaire != 3 and reponse_inventaire != 4 and reponse_inventaire != 5 and reponse_inventaire != 6 and reponse_inventaire != 7:
+    print("Réponse invalide veillez donner un chiffre correct")
+    reponse_inventaire = int(input())
+
+  if reponse_inventaire == 1:
+    for key, value in inventory["Armes"].items():
+      print("Vous possedez:", value, key)
+    return Vie, Mana, Armure
+
+  elif reponse_inventaire == 2:
+    for key, value in inventory["Potions"].items():
+      print("Vous possedez:", value, key)
+    Vie, Mana, Armure = prendre_potion(Vie, Mana, Armure, Vie_max, Mana_max)
+    return Vie, Mana, Armure
+
+  elif reponse_inventaire == 3:
+    for key, value in inventory["Armures"].items():
+      print("Vous possedez:", key)
+      print("Et", Armure, "d'armure")
+    return Vie, Mana, Armure
+
+  elif reponse_inventaire == 4:
+    if inventory["livre de quête"] == {}:
+      print("Vous n'avez pas encore de Quête")
+      return Vie, Mana, Armure
+    else:
+      for key, value in inventory["livre de quête"].items():
+        print("Vos quêtes sont:", key)
+
+      for key, value in inventory["Objet"].items():
+        print("pour le moment vous avez", value, key)
+      return Vie, Mana, Armure
+
+  elif reponse_inventaire == 5:
+    print("Vous êtes en X:", x)
+    print("Vous êtes en Y:", y)
+    print("Vous arrivez à lire une petite note en bas de la carte qui dit qu'en X:29 et Y:20 ce trouve un homme trés étrange et malpoli")
+    print("Vous arrivez aussi à lire qu'en X:27 et en Y:21 ce trouve un bonne alliés pour les aventuriés")
+    return Vie, Mana, Armure
+
+  elif reponse_inventaire == 6:
+    return Vie, Mana, Armure
+
+  elif reponse_inventaire == 7:
+    print("Vous ouvrez « le guide des aventuriers »")
+    LeGuideDesAventuriers()
+    return Vie, Mana, Armure
+
+def prendre_potion(Vie, Mana, Armure, Vie_max, Mana_max):
+  print("""Voulez-vous prendre une potion ?
+  1- Oui
+  2- Non
+  """)
+  reponse_potion = int(input())
+
+  while reponse_potion != 1 and reponse_potion != 2:
+    print("Réponse invalide veillez donner un chiffre correct")
+    reponse_potion = int(input())
+
+  if reponse_potion == 1:
+    print("""Vous prenez:
+    1- Potion de Vie
+    2- Potion de Mana
+    3- Potion d'armure
+    4- Potion de Force
+    5- Ne pas prendre de potion
+    """)
+    reponse_potion_choisie = int(input())
+
+    while reponse_potion_choisie != 1 and reponse_potion_choisie != 2 and reponse_potion_choisie != 3 and reponse_potion_choisie != 4 and reponse_potion_choisie != 5:
+      print("Réponse invalide veillez donner un chiffre correct")
+      reponse_potion_choisie = int(input())
+
+    if reponse_potion_choisie == 1 and Vie + 25 <= Vie_max and inventory["Potions"]["Potion de soin"] > 0:
+      Vie = potion_vie(Vie)
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 1 and Vie != Vie_max and Vie + 25 >= Vie_max and inventory["Potions"]["Potion de soin"] > 0:
+      print("Vous regagnez des PV")
+      inventory["Potions"]["Potion de soin"] = inventory["Potions"]["Potion de soin"] - 1
+      Vie = Vie_max
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 1 and Vie == Vie_max and inventory["Potions"]["Potion de soin"] > 0:
+      print("Vos PV sont deja au maximum")
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 1 and inventory["Potions"]["Potion de soin"] <= 0:
+      print("Vous ne possédez pas assez de potion")
+      return Vie, Mana, Armure
+      
+    elif reponse_potion_choisie == 2 and Mana + 15 <= Mana_max and inventory["Potions"]["Potion de mana"] > 0:
+      Mana = potion_mana(Mana)
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 2 and Mana + 15 >= Mana_max and Mana != Mana_max and inventory["Potions"]["Potion de mana"] > 0:
+      print("Vous regagnez du mana")
+      inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion de mana"] - 1
+      Mana = 100
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 2 and Mana == Mana_max and inventory["Potions"]["Potion de mana"] > 0:
+      print("Votre Mana est au maximum")
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 2 and inventory["Potions"]["Potion de mana"] <= 0:
+      print("Vous ne possédez pas assez de potion")
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 3 and Armure + 25 <= 75 and inventory["Potions"]["Potion d'armure"] > 0:
+      Armure = potion_armure(Armure)
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 3 and Armure + 25 >= 75 and Armure != 75 and inventory["Potions"]["Potion d'armure"] > 0:
+      print("Vous regagnez de l'armure")
+      inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion d'armure"] - 1
+      Armure = 75
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 3 and Armure == 75 and inventory["Potions"]["Potion d'armure"] > 0:
+      print("Votre Armure est toute neuve")
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 2 and inventory["Potions"]["Potion d'armure"] <= 0:
+      print("Vous ne possédez pas assez de potion")
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 4:
+      print("Cette potion ne peut être utilisé quand combat")
+      return Vie, Mana, Armure
+
+    elif reponse_potion_choisie == 5:
+      return Vie, Mana, Armure
+
+  elif reponse_potion == 2:
+    return Vie, Mana, Armure
+      
+def etat(Vie, Mana, Armure, attaque_arc, attaque_epee, Piece_or, degat_magique, level, XP,Barre_Xp):
+  print("Il vous reste:")
+  print(Vie, "PV")
+  print(Armure, "d'armure")
+  print(Mana, "de mana")
+  print(Piece_or, "de pièce d'or")
+  print("Vous avez:")
+  print(attaque_epee, "de dégat avec votre épée")
+  print(attaque_arc, "de dégat avec votre arc")
+  print(degat_magique, "de dégat avec votre sort")
+  print(level, "lvl")
+  print(XP, "d'xp")
+  print("Il vous manque", (Barre_Xp - XP), "xp avant le prochain niveau")
+  choice(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+def potion_vie(Vie):
+  print("Vous regagnez de la vie")
+  Vie = Vie + 25
+  inventory["Potions"]["Potion de soin"] = inventory["Potions"]["Potion de soin"] - 1
+  return Vie
+def potion_mana(Mana):
+  print("Vous regagnez du Mana")
+  Mana = Mana + 15
+  inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion de mana"] - 1
+  return Mana
+def potion_armure(Armure):
+  print("Vous regagnez des bout d'armure")
+  Armure = Armure + 25
+  inventory["Potions"]["Potion d'armure"] = inventory["Potions"]["Potion d'armure"] - 1
+  return Armure
+def level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max):
+  if XP < Barre_Xp:
+    print("Vous n'êtes pas monté de niveau, pour le moment il vous manque", (Barre_Xp - XP), "d'xp avant le prochain niveau")
+
+  while XP >= Barre_Xp:
+    if XP == Barre_Xp:
+      print("Vous monté de niveau")
+      level = level + 1
+      Barre_Xp = Barre_Xp * 1.7
+      XP = 0
+      attaque_arc = attaque_arc // 0.83
+      attaque_epee = attaque_epee // 0.83
+      degat_magique = degat_magique // 0.83
+      Vie = Vie // 0.83
+      Mana = Mana // 0.83
+      Vie_max = Vie_max // 0.83
+      Mana_max = Mana_max // 0.83
+
+    elif XP > Barre_Xp:
+      print("Vous monté de niveau")
+      level = level + 1
+      XP = XP - Barre_Xp
+      Barre_Xp = Barre_Xp * 1.7
+      attaque_arc = attaque_arc // 0.83
+      attaque_epee = attaque_epee // 0.83
+      degat_magique = degat_magique // 0.83
+      Vie = Vie // 0.83
+      Mana = Mana // 0.83
+      Vie_max = Vie_max // 0.83
+      Mana_max = Mana_max // 0.83
+
+
+
+  return Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+def move(current_position, x, y):
+  print("""
+  1. Aller à l'est
+  2. Aller à l'ouest
+  3. Aller au nord
+  4. Aller au sud
+  5. Retourner aux autres choix
+  """)
+
+  direction = int(input())
+
+  while direction != 1 and direction != 2 and direction != 3 and direction != 4 and direction != 5:
+    print("Réponse invalide veillez donner un chiffre correct")
+    direction = int(input())
+
+  if direction == 1:
+    y = y
+    x = x + 1
+    current_position = L[y][x]
+    return current_position, x, y
+
+
+  elif direction == 2:
+    y = y
+    x = x - 1
+    current_position = L[y][x]
+    return current_position, x, y
+
+
+  elif direction == 3:
+    x = x
+    y = y - 1
+    current_position = L[y][x]
+    return current_position, x, y
+
+
+  elif direction == 4:
+    x = x
+    y = y + 1
+    current_position = L[y][x]
+    return current_position, x, y
+
+  elif direction == 5:
+    return current_position, x, y
+    
+def combat(Vie, Mana, Armure, attaque_arc, attaque_epee, monstre_PV, attaque_monstre, une_potion, degat_magique):
+  fuite = 0
+  i = 0
+  combat = 0
+  sauvegarde_attaque_arc = attaque_arc
+  sauvegarde_attaque_epee = attaque_epee
+  while combat == 0:
+    while i % 2 == 0 and monstre_PV > 0 and Vie > 0 and fuite != 1:
+      print("""Que faites vous ?
+      1- Attaque physique
+      2- Sort
+      3- Fuite
+      4- Prendre une potion
+      5- voir votre état rapidement
+      """)
+      reponse_combat = int(input())
+
+      while reponse_combat != 1 and reponse_combat != 2 and reponse_combat != 3 and reponse_combat != 4 and reponse_combat != 5:
+        print("Réponse invalide veillez donner un chiffre correct")
+        reponse_combat = int(input())
+
+      if reponse_combat == 1:
+        print("""
+        1- Attaquer avec votre épée
+        2- Tirer avec votre arc
+        3- Revenir en arrière
+        """)
+        reponse_de_arme = int(input())
+        while reponse_de_arme != 1 and reponse_de_arme != 2 and reponse_de_arme != 3:
+          print("Réponse invalide veillez donner un chiffre correct")
+          reponse_de_arme = int(input())
+
+        if reponse_de_arme == 1:
+          print("Toucher le monstre perd", attaque_epee, "PV")
+          monstre_PV = monstre_PV - attaque_epee
+          i = i + 1
+
+        elif reponse_de_arme == 2 and inventory["Armes"]["Des flèches"] > 0:
+          print("Toucher le monstre perd", attaque_arc, "PV")
+          monstre_PV = monstre_PV - attaque_arc
+          inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] - 1
+          i = i + 1
+
+        elif reponse_de_arme == 2 and inventory["Armes"]["Des flèches"] <= 0:
+          print("Vous n'avez plus assez de flèche")
+          i = i + 2
+
+        elif reponse_de_arme == 3:
+          i = i + 2
+
+      elif reponse_combat == 2:
+        print("""
+        1- Sort d'explosion
+        2- Sort de fuite assuré
+        3- Revenir en arrière
+        """)
+        reponse_sort = int(input())
+
+        while reponse_sort != 1 and reponse_sort != 2 and reponse_sort != 3:
+          print("Réponse invalide veillez donner un chiffre correct")
+          reponse_sort = int(input())
+
+        if reponse_sort == 1 and Mana >= 50:
+          print("Toucher le monstre perd", degat_magique, "PV")
+          monstre_PV = monstre_PV - degat_magique
+          Mana = Mana - 50
+          i = i + 1
+
+        elif reponse_sort == 1 and Mana < 50:
+          print("Vous n'avez pas assez de Mana")
+
+        elif reponse_sort == 2 and Mana >= 75:
+          Mana = Mana - 75
+          fuite = 1
+          combat = 1
+
+        elif reponse_sort == 2 and Mana < 75:
+          print("Vous n'avez pas assez de Mana")
+          i = i + 2
+
+        elif reponse_sort == 3:
+          i = i + 2
+
+      elif reponse_combat == 3:
+        vitesse = random.randint(0,3)
+        if vitesse == 1:
+          fuite = 1
+          combat = 1
+        else:
+          print("Vous n'avez pas réussi à vous enfuire")
+          i = i + 1
+
+      elif reponse_combat == 4:
+        Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion = prendre_potion_combat(Vie, Mana, Armure, attaque_arc, attaque_epee, monstre_PV, attaque_monstre, une_potion, Vie_max, Mana_max)
+        print("Attention le temps que vous avez passé à fouiner dans votre sac l'ennemie c'est préparé pour attaquer")
+        i = i + 1
+
+      elif reponse_combat == 5:
+        etat_combat(Vie, Mana, Armure, attaque_arc, attaque_epee, monstre_PV, attaque_monstre, une_potion)
+        i = i + 2
+
+    while i % 2 != 0 and monstre_PV > 0 and Vie > 0 and fuite != 1:
+      print("Au tour de l'ennemie")
+      chance = random.randint(1,5)
+      if chance == 2:
+        print("Le monstre rate son attaque")
+        i = i + 1
+      elif chance != 2 and Armure > 0:
+        print("Le monstre vous blesse, mais votre armure encaisse une parti des dommages")
+        print("Vous perdez", (attaque_monstre//2), "PV")
+        Vie = Vie - (attaque_monstre//2)
+        Armure = Armure - (attaque_monstre//2)
+        i = i + 1
+
+      elif chance != 2 and Armure <= 0:
+        print("Le monstre vous blesse", "Vous perdez", attaque_monstre, "PV")
+        Vie = Vie - attaque_monstre
+        i = i + 1
+
+    if monstre_PV <= 0:
+      print("Vous avez gagner")
+      attaque_arc = sauvegarde_attaque_arc
+      attaque_epee = sauvegarde_attaque_epee
+      une_potion = 0
+      return Vie, Mana, Armure
+      
+
+    elif Vie <= 0:
+      sys.exit("Vous êtes mort")
+
+    elif fuite == 1:
+      print("Vous arrivez à fuir")
+      attaque_arc = sauvegarde_attaque_arc
+      attaque_epee = sauvegarde_attaque_epee
+      une_potion = 0
+      return Vie, Mana, Armure
+
+def prendre_potion_combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin, attaque_goblin, une_potion, Vie_max, Mana_max):
+  Vie = Vie
+  Mana = Mana
+  Armure = Armure
+  attaque_arc = attaque_arc
+  attaque_epee = attaque_epee
+  Vie_goblin = Vie_goblin
+  attaque_goblin = attaque_goblin
+  une_potion = une_potion
+
+  print("""Voulez-vous prendre une potion ?
+  1- Oui
+  2- Non
+  """)
+  reponse_potion_combat = int(input())
+
+  while reponse_potion_combat != 1 and reponse_potion_combat != 2:
+    print("Réponse invalide veillez donner un chiffre correct")
+    reponse_potion_combat = int(input())
+
+  if reponse_potion_combat == 1:
+    print("""Vous prenez:
+    1- Potion de Vie
+    2- Potion de Mana
+    3- Potion d'armure
+    4- Potion de Force
+    5- Ne pas prendre de potion
+    """)
+    reponse_potion_choisie_combat = int(input())
+
+    while reponse_potion_choisie_combat != 1 and reponse_potion_choisie_combat != 2 and reponse_potion_choisie_combat != 3 and reponse_potion_choisie_combat != 4 and reponse_potion_choisie_combat != 5:
+      print("Réponse invalide veillez donner un chiffre correct")
+      reponse_potion_choisie_combat = int(input())
+
+    if reponse_potion_choisie_combat == 1 and Vie + 25 <= Vie_max and inventory["Potions"]["Potion de soin"] > 0:
+      Vie = potion_vie(Vie)
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 1 and Vie != Vie_max and Vie + 25 >= Vie_max and inventory["Potions"]["Potion de soin"] > 0:
+      print("Vous regagnez des PV")
+      inventory["Potions"]["Potion de soin"] = inventory["Potions"]["Potion de soin"] - 1
+      Vie = Vie_max
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 1 and Vie == Vie_max and inventory["Potions"]["Potion de soin"] > 0:
+      print("Vos PV sont deja au maximum")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+      
+    elif reponse_potion_choisie_combat == 1 and inventory["Potions"]["Potion de soin"] <= 0:
+      print("Vous n'avez plus assez de potion")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 2 and Mana + 15 <= Mana_max and inventory["Potions"]["Potion de mana"] > 0:
+      Mana = potion_mana(Mana)
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 2 and Mana + 15 >= Mana_max and Mana != Mana_max and inventory["Potions"]["Potion de mana"] > 0:
+      print("Vous regagnez du mana")
+      inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion de mana"] - 1
+      Mana = Mana_max
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 2 and Mana == Mana_max and inventory["Potions"]["Potion de mana"] > 0:
+      print("Votre Mana est au maximum")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 2 and inventory["Potions"]["Potion de mana"] <= 0:
+      print("Vous n'avez plus assez de potion")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 3 and Armure + 25 <= 75 and inventory["Potions"]["Potion d'armure"] > 0:
+      Armure = potion_armure(Armure)
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 3 and Armure + 25 >= 75 and Armure != 75 and inventory["Potions"]["Potion d'armure"] > 0:
+      print("Vous regagnez des l'armure")
+      inventory["Potions"]["Potion d'armure"] = inventory["Potions"]["Potion d'armure"] - 1
+      Armure = 75
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 3 and Armure == 75 and inventory["Potions"]["Potion d'armure"] > 0:
+      print("Votre Armure est toute neuve")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 3 and inventory["Potions"]["Potion d'armure"] <= 0:
+      print("Vous n'avez plus assez de potion")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 4 and une_potion == 0 and inventory["Potions"]["Potion de force"] > 0:
+      print("Vos muscle gonfle de manière incontrolé vous le sentez, vous êtes capable de faire deux fois plus de dégats avec votre arc et votre épée")
+      inventory["Potions"]["Potion de force"] = inventory["Potions"]["Potion de force"] - 1
+      attaque_arc = attaque_arc * 2
+      attaque_epee = attaque_epee * 2
+      une_potion = 1
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 4 and une_potion == 1 and inventory["Potions"]["Potion de force"] > 0:
+      print("Vous ne pouvez prendre qu'une potion de force par combat")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 4 and inventory["Potions"]["Potion de force"] <= 0:
+      print("Vous n'avez plus assez de potion")
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+    elif reponse_potion_choisie_combat == 5:
+      return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+  elif reponse_potion_combat == 2:
+    return Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion
+
+def etat_combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin, attaque_goblin, une_potion):
+  print("Il vous reste:")
+  print(Vie, "PV")
+  print(Armure, "d'armure")
+  print(Mana, "de mana")
+def interraction_bordure(c_p):
+  if c_p == 20:
+    print("Vous ne pouvez plus aller au sud")
+    return c_p
+
+  elif c_p == 21:
+    print("Vous ne pouvez plus aller au nord")
+    return c_p
+
+
+  elif c_p == 22:
+    print("Vous ne pouvez plus aller à l'ouest")
+    return c_p
+
+  elif c_p == 23:
+    print("Vous ne pouvez plus aller à l'est")
+    return c_p
+
+  elif c_p == 24:
+    print("Vous ne pouvez plus aller au nord ou à l'est")
+    return c_p
+
+  elif c_p == 25:
+    print("Vous ne pouvez plus aller au nord ou à l'ouest")
+    return c_p
+
+  elif c_p == 26:
+    print("Vous ne pouvez plus aller au sud ou à l'est")
+    return c_p
+
+  elif c_p == 27:
+    print("Vous ne pouvez plus aller au sud ou à l'ouest")
+    return c_p
+
+def interraction_pacifique(c_p, Piece_or):
+
+  if c_p == 10:
+    Piece_or = Marchand(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 11:
+    Piece_or = Sorcier(Piece_or)
+    return c_p, Piece_or
+
+
+  elif c_p == 12:
+    Piece_or = Villageois(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 14:
+    Piece_or = CoffreFacile1(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 15:
+    Piece_or = CoffreFacile2(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 16:
+    Piece_or = CoffreFacile3(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 17:
+    Piece_or = CoffreMoyen1(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 18:
+    Piece_or = CoffreMoyen2(Piece_or)
+    return c_p, Piece_or
+
+  elif c_p == 19:
+    Piece_or = CoffreDifficile1(Piece_or)
+    print("Vous ne pouvez plus aller au sud")
+    return c_p, Piece_or
+
+def interraction_monstre(c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max):
+
+  if c_p == 1:
+    print("Oh non, un goblin t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_goblin = 50
+      attaque_goblin = 10
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin, attaque_goblin, une_potion, degat_magique)
+      XP = XP + 50
+      Vie, Mana,attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana,attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      if inventory["livre de quête"] != {} and inventory["livre de quête"]["Quête collier"] == 1 and inventory["Objet"]["perle"] != 7:
+        inventory["Objet"]["perle"] = inventory["Objet"]["perle"] + 1
+        print("Vous avez trouvé une perle")
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+  elif c_p == 2:
+    print("Oh non, un goblin soldat t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_goblin_soldat = 60
+      attaque_goblin_soldat = 15
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin_soldat, attaque_goblin_soldat, une_potion, degat_magique)
+      XP = XP + 75
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      if inventory["livre de quête"] != {} and inventory["livre de quête"]["Quête collier"] == 1 and inventory["Objet"]["perle"] != 7:
+        inventory["Objet"]["perle"] = inventory["Objet"]["perle"] + 1
+        print("Vous avez trouvé une perle")
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+    
+  elif c_p == 3:
+    print("Oh non, un chef goblin t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_goblin_chef = 70
+      attaque_goblin_chef = 20
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin_chef, attaque_goblin_chef, une_potion, degat_magique)
+      XP = XP + 100
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      if inventory["livre de quête"] != {} and inventory["livre de quête"]["Quête collier"] == 1 and inventory["Objet"]["perle"] != 7:
+        inventory["Objet"]["perle"] = inventory["Objet"]["perle"] + 1
+        print("Vous avez trouvé une perle")
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+  elif c_p == 4:
+    print("Oh non, le boss goblin t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_goblin_boss = 100
+      attaque_goblin_boss = 30
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin_boss, attaque_goblin_boss, une_potion, degat_magique)
+      XP = XP + 250
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      if inventory["livre de quête"] != {} and inventory["livre de quête"]["Quête collier"] == 1 and inventory["Objet"]["perle"] != 7:
+        inventory["Objet"]["perle"] = inventory["Objet"]["perle"] + 1
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+  elif c_p == 5:
+    print("Oh non, un skelette t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_skelette = 100
+      attaque_skelette = 25
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_skelette, attaque_skelette, une_potion, degat_magique)
+      XP = XP + 175
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+  elif c_p == 6:
+    print("Oh non, un geurrier skelette t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_skelette_guerrier = 110
+      attaque_skelette_guerrier = 35
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_skelette_guerrier, attaque_skelette_guerrier, une_potion, degat_magique)
+      XP = XP + 200
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+  elif c_p == 7:
+    print("Oh non, le boss skelette t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_skelette_boss = 170
+      attaque_skelette_boss = 50
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_skelette_boss, attaque_skelette_boss, une_potion, degat_magique)
+      XP = XP + 500
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+  elif c_p == 8:
+    print("Oh non, une panther d'ombre t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_panther_ombre = 130
+      attaque_panther_ombre = 35
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_panther_ombre, attaque_panther_ombre, une_potion, degat_magique)
+      XP = XP + 350
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+
+  elif c_p == 9:
+    print("Oh non, le boss panther d'ombre alpha t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_panther_ombre_a = 140
+      attaque_panther_ombre_a = 40
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_panther_ombre_a, attaque_panther_ombre_a, une_potion, degat_magique)
+      XP = XP + 450
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+def interraction_extreme(c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max):
+  if c_p == 30:
+    print("Oh non, un goblin géant t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_goblin_geant = 175
+      attaque_goblin_geant = 40
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_goblin_geant, attaque_goblin_geant, une_potion, degat_magique)
+      XP = XP + 500
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+  elif c_p == 31:
+    print("Oh non, un skelette géant t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_skelette_geant = 175
+      attaque_skelette_geant = 45
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_skelette_geant, attaque_skelette_geant, une_potion, degat_magique)
+      XP = XP + 600
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+  elif c_p == 32:
+    print("Oh non, une panther géantz t'attaque")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_panther_geant = 200
+      attaque_panther_geant = 50
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_panther_geant, attaque_panther_geant, une_potion, degat_magique)
+      XP = XP + 650
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+  
+  elif c_p == 33:
+    print("Oh non, te voila fasse au boss final")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_boss = 350
+      attaque_boss = 60
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_boss, attaque_boss, une_potion, degat_magique)
+      XP = XP + 750
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      credit()
+      time.sleep(15.0)
+      sys.exit("Vous avez sauvé le monde")
+
+  elif c_p == 34:
+    print("Oh non, te voila fasse au roi dragon")
+    print("Appuie sur X pour débuter l'affrontement")
+    reponse_de_début = input()
+    if reponse_de_début == "x" or "X":
+      Vie_boss_dragon = 700
+      attaque_boss_dragon = 80
+      Vie, Mana, Armure = combat(Vie, Mana, Armure, attaque_arc, attaque_epee, Vie_boss_dragon, attaque_boss_dragon, une_potion, degat_magique)
+      XP = XP + 1000
+      Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max = level_up(Vie, Mana, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
+      return c_p, Vie, Mana, Armure, attaque_arc, attaque_epee, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max
+
+def credit():
+  print("""
+  Histoire du Jeu:
+    -Alassane Meite
+    -Othniel
+
+  Création de toute les interractions pacifique:
+    -Axel Ronet
+
+  Création Inventaire:
+    -Axel Ronet
+
+  Création du menu principale:
+    -Maxime Kofi
+
+  Création de la carte :
+    -Axel Ronet
+
+  Ajout de la carte dans le jeu:
+    -Maxime Kofi
+
+  Création interraction avec les ennemies:
+    -Omar Konte
+    -Sofian Rayd
+
+  Création interraction avec les bordure:
+    -Omar Konte
+
+  Création du system de level up:
+    -Alassane Meite
+    -Omar Konte
+
+  Creation du systeme de combat:
+    -Omar Konte
+
+  Creation du systeme pour prendre les potions:
+    -Sofian Rayd
+
+  Creation du systeme de déplacement:
+    -Omar Konte
+
+  Conception des ennemies:
+    -Sofian Rayd
+    -Omar Konte
+
+  Mise en place de la réunion de tout les codes entre eux:
+    -Maxime Kofi
+    -Omar Konte
+
+  Beta testeur:
+    -Othniel
+    -Alassane Meite
+    -Omar Konte
+  """)
+
+def LeGuideDesAventuriers():
+  print ('''
+  Salutation aventurier. Notre monde à été envahit par des créature venant d'ailleurs. Tu es l'élu, toi seul peut nous en débarasser et je suis là pour t'aider dans ta quête.
+
+  Objectif Principal :
+  Ton objectif principal est de tuer le Roi des Démons, celui qui contrôle toutes les créatures de ces contrées. Si tu y arrives, alors nous aurons gagné et notre monde sera enfin libéré. Mais cela ne sera pas aussi simple que ça. En effet, ce monde est divisé en 5 zones dont le niveau de difficulté est différent. Tu commence dans la zone d'apparition qui est la seule zone encore vierge de tout ces monstres. Tu vas ensuite explorer chaque zones dans lesquelles se trouve les seconds du Roi des Démons. Tu devras tous les affronter jusqu'à entrer dans la zone où le Roi des Démons demeure, la zone de difficulté extrême. Fais très attention à cette zone Aventurier; tous ceux qui y sont allé n'en sont jamais revenu.
+
+  Evènements :
+  Durant ton périple tu as des chances de croiser des évènements qui peuvent être bénéfiques dans ta quête mais également d'autres qui peuvent être néfastes. Alors veilles à faire les bons choix Aventurier.
+
+  Coffres :
+  Avant ton arrivée, j'ai réussi à placer quelques coffres sur ces terres afin de t'aider dans ta quête. Les emplacements de ces derniers sont disponible sur la carte. Malheureusement, le Roi des Démons à eux connaissance de cette information et à envoyer ses meilleurs sbires pour protéger ces coffres. Alors si tu souhaites tout de même les ouvrir, saches que ce ne sera pas de tout repos.
+
+  Combats:
+  Durant ton aventure tu seras amené à te battre. Mais ne t'en fais pas, tu es né pour ça. Enfin...normalement... Pendant tes combats, tu auras le choix entre plusieurs attaques:
+  - Une attaque avec ton épée (une attquae simple mais utilisable indéfiniment)
+  - Une attaque avec ton arc (une attaque faisant plus de dégats que celle avec l'épée mais pas infini car celle-ci dépends du nombre de flèches que tu as dans ton inventaire)
+  - Une attaque magique (Des pouvoirs t'ont été conféré pour t'aider dans ta quête. Ces derniers sont très puissant mais également très limité alors fais en bonne usage Aventurier)
+
+  Potions:
+  Plusieurs type de potion sont disponible pour t'aider à vaincre ces monstres.
+  - La Potion de Vie (Cette potion te redonnera 25 points de Vie quand tu seras dans le besoin)
+  - La Potion d'Armure (Cette potion te donnera 25 points d'armure quand tu seras dans le besoin)
+  - La Potion de Force (Cette potion te permet de doubler les dégats que tu fais aux monstre lors d'un combat, attention tu ne peut en utiliser qu'une seule durant un combat)
+  - La Potion de Magie (Cette potion te donnera 15 points de magie)
+  Tu pourras les obtenir de différentes façons mais je préfères te laisser découvrir ça par toi-même.
+
+  J'espère t'avoir aider. Bonne chance Aventurier. Délivre ce monde de ses démons !
+  ''')
+  
+def CoffreFacile1(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 15 Pièces d'Or
+  - 6 Flèches
+  ''')
+  Piece_or = Piece_or + 15
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 6
+  return Piece_or
+def CoffreFacile2(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 12 Pièces d'Or
+  - 6 Flèches
+  ''')
+  Piece_or = Piece_or + 12
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 6
+  return Piece_or
+def CoffreFacile3(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 18 Pièces d'Or
+  - 2 Flèches
+  ''')
+  Piece_or = Piece_or + 18
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 2
+  return Piece_or
+def CoffreMoyen1(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 17 Pièces d'Or
+  - 4 Flèches
+  - 5 Potion de soin
+  ''')
+  Piece_or = Piece_or + 17
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 4
+  inventory["Potions"]["Potion de soin"] = inventory["Potions"]["Potion de soin"] + 5
+  return Piece_or
+def CoffreMoyen2(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 10 Pièces d'Or
+  - 8 Flèches
+  - 3 Potion de force
+  ''')
+  Piece_or = Piece_or + 10
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 8
+  inventory["Potions"]["Potion de force"] = inventory["Potions"]["Potion de force"] + 3
+  return Piece_or
+def CoffreDifficile1(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 24 Pièces d'Or
+  - 11 Flèches
+  - 7 Potion de Mana
+  ''')
+  Piece_or = Piece_or + 24
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 11
+  inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion de mana"] + 7
+  return Piece_or
+
+def Marchand(Piece_or):
+  print("Marchand : Bien le bonjour jeune aventurier ! J'ai des flèches pour t'aider à nous débarasser de ces monstres. Cela ne te coûtera que quelques pièces. Et oui il faut bien nourir sa famille. Alors aventurier, ça t'intéresse ?")
+  print('''
+  1- Oui je veux bien !
+  2- Non merci j'ai déjà tout ce qu'il me faut.
+  ''')
+  reponse1_marchand = int(input())
+  while reponse1_marchand != 1 and reponse1_marchand != 2:
+    print("Réponse invalide veillez donner un chiffre correct")
+    reponse1_marchand = int(input())
+
+  if reponse1_marchand == 1 and Piece_or >= 10:
+    print("Marchand : Super ! Combien en veux-tu ?")
+    print('''
+    1- 5 Flèches ( 10 pièces )
+    2- 10 Flèches ( 20 pièces)
+    3- 20 Flèches ( 40 pièces )
+    4- 30 Flèches ( 60 pièces )
+    5- Finallement je vais faire avec ce que j'ai.
+    ''')
+    reponse2_marchand = int(input())
+    while reponse2_marchand < 1 or reponse2_marchand > 5:
+      reponse2_marchand = int(input())
+
+    if reponse2_marchand == 1 and Piece_or >= 10:
+      inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 5
+      Piece_or = Piece_or - 10
+      print("Super aventurier ! Ces flèches te seront bien utiles. Maintenant débarasse nous de ces monstres !")
+      return Piece_or
+
+    elif reponse2_marchand == 2 and Piece_or >= 20:
+      inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 10
+      Piece_or = Piece_or - 20
+      print("Super aventurier ! Ces flèches te seront bien utiles. Maintenant débarasse nous de ces monstres !")
+      return Piece_or
+
+    elif reponse2_marchand == 3 and Piece_or >= 40:
+      inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 20
+      Piece_or = Piece_or - 40
+      print("Super aventurier ! Ces flèches te seront bien utiles. Maintenant débarasse nous de ces monstres !")
+      return Piece_or
+
+    elif reponse2_marchand == 4 and Piece_or >= 60:
+      inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 30
+      Piece_or = Piece_or - 60
+      print("Wow merci de me prendre autant de flèches aventurier ! Grâce à toi ma famille va pouvoir bien manger ! Maintenant débarasse nous de ces monstres et plante une de ces flèches dans le coeur de l'un d'entre eux pour moi !")
+      return Piece_or
+
+    elif reponse2_marchand == 5:
+      return Piece_or
+
+    else:
+      print("Mince tu n'as pas assez de pièces d'or. On dirait que ma famille ne va pas manger ce mois-ci... Reviens me voir quand tu auras un peu plus de pièces.")
+      return Piece_or
+
+  elif reponse1_marchand == 1 and Piece_or < 10:
+    print("Mince tu n'as pas assez de pièces d'or. On dirait que ma famille ne va pas manger ce mois-ci... Reviens me voir quand tu auras un peu plus de pièces.")
+    return Piece_or
+
+  elif reponse1_marchand == 2:
+    return Piece_or
+
+def CoffreFacile1(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 15 Pièces d'Or
+  - 6 Flèches
+  ''')
+  Piece_or = Piece_or + 15
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 6
+  return Piece_or
+def CoffreFacile2(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 12 Pièces d'Or
+  - 6 Flèches
+  ''')
+  Piece_or = Piece_or + 12
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 6
+  return Piece_or
+def CoffreFacile3(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 18 Pièces d'Or
+  - 2 Flèches
+  ''')
+  Piece_or = Piece_or + 18
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 2
+  return Piece_or
+def CoffreMoyen1(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 17 Pièces d'Or
+  - 4 Flèches
+  - 5 Potion de soin
+  ''')
+  Piece_or = Piece_or + 17
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 4
+  inventory["Potions"]["Potion de soin"] = inventory["Potions"]["Potion de soin"] + 5
+  return Piece_or
+def CoffreMoyen2(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 10 Pièces d'Or
+  - 8 Flèches
+  - 3 Potion de force
+  ''')
+  Piece_or = Piece_or + 10
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 8
+  inventory["Potions"]["Potion de force"] = inventory["Potions"]["Potion de force"] + 3
+  return Piece_or
+def CoffreDifficile1(Piece_or):
+  print("Bien joué tu as trouvé un coffre ! A toi la récompense !")
+  print('''
+  Contenu du coffre :
+  - 24 Pièces d'Or
+  - 11 Flèches
+  - 7 Potion de Mana
+  ''')
+  Piece_or = Piece_or + 24
+  inventory["Armes"]["Des flèches"] = inventory["Armes"]["Des flèches"] + 11
+  inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion de mana"] + 7
+  return Piece_or
+
+def Sorcier(Piece_or):
+  print("Sorcier : Eh psst viens par là, j'ai quelque chose à te proposer... Un peu d'élixir fait maison en échange de quelques pièces ça t'intéresse ?")
+  print('''
+  1- Avec plaisir !
+  2- Euh non merci ça ira...
+  ''')
+  reponse1_sorcier = int(input())
+  while reponse1_sorcier != 1 and reponse1_sorcier != 2:
+    print("Réponse invalide veillez donner un chiffre correct")
+    reponse1_sorcier = int(input())
+
+  if reponse1_sorcier == 1 and Piece_or >= 30:
+    print("Sorcier : Super tu ne vas pas le regretter ! J'en ai plusieurs à te proposer.")
+    print('''
+    1- Potion de Soin ( 30 pièces )
+    2- Potion d'armure ( 30 pièces)
+    3- Potion de force ( 30 pièces )
+    4- Potion de Magie ( 40 pièces )
+    5- Finallement je ne suis pas intéressé.
+    ''')
+    reponse2_sorcier = int(input())
+    while reponse2_sorcier < 1 or reponse2_sorcier > 5:
+      reponse2_sorcier = int(input())
+
+    if reponse2_sorcier == 1:
+      inventory["Potions"]["Potion de soin"] = inventory["Potions"]["Potion de soin"] + 1
+      Piece_or = Piece_or - 30
+      print("Tu as fais une bonne affaire. Cette potion te redonnera 25 points de Vie quand tu seras dans le besoin.")
+      return Piece_or
+
+    elif reponse2_sorcier == 2:
+      inventory["Potions"]["Potion d'armure"] = inventory["Potions"]["Potion d'armure"] + 1
+      Piece_or = Piece_or - 30
+      print("Tu as fais une bonne affaire. Cette potion te donnera 25 points d'armure quand tu seras dans le besoin.")
+      return Piece_or
+
+    elif reponse2_sorcier == 3:
+      inventory["Potions"]["Potion de force"] = inventory["Potions"]["Potion de force"] + 1
+      Piece_or = Piece_or - 30
+      print("Tu as fais une bonne affaire. Cette potion te donnera une force inconscevable pendant un combat.")
+      return Piece_or
+
+    elif reponse2_sorcier == 4 and Piece_or >= 40:
+      inventory["Potions"]["Potion de mana"] = inventory["Potions"]["Potion de mana"] + 1
+      Piece_or = Piece_or - 40
+      print("Tu as fais une bonne affaire. Cette potion te donnera 15 points de magie.")
+      return Piece_or
+
+    elif reponse2_sorcier == 4 and Piece_or < 40:
+      print("Sorcier : Ah mais tu es pauvres ! Laisse tomber, reviens me voir quand tu auras un peu plus de pièces...")
+      return Piece_or
+
+    elif reponse2_sorcier == 5:
+      return Piece_or
+  
+  elif reponse1_sorcier == 1 and Piece_or < 30:
+    print("Sorcier : Ah mais tu es pauvres ! Laisse tomber, reviens me voir quand tu auras un peu plus de pièces...")
+    return Piece_or
+
+  elif reponse1_sorcier == 2:
+    return Piece_or
+
+def Villageois(Piece_or):
+ if inventory["livre de quête"] == {}:
+  print("Villageois : Aventurier aide moi ! Je t'en supplie ! Les goblins m'ont volé le collier qui appartenait à ma grand mère et se sont partagé les perles entre eux ! Ce collier à une très grosse valeur sentimentale pour moi ! Je suis prêt à t'offrir beaucoup de pièce si tu me le rapporte en entier.")
+  print('''
+  1- Compte sur moi, je vais te rapporter ton collier !
+  2- Non, je n'ai pas le temps pour un vulgaire collier.
+  ''')
+  reponse1_villageois = int(input())
+  while reponse1_villageois < 1 or reponse1_villageois > 2:
+      reponse1_villageois = int(input())
+  if reponse1_villageois == 1:
+    print("Villageois : Oh merci aventurier ! Le collier est composé de 7 perles, il me les faut toutes pour pouvoir le rassembler. Si tu parvient à me les ramener je t'offrirai une belle récompense !")
+    inventory["livre de quête"]["Quête collier"] = 1
+    inventory["Objet"] = {"perle" : 0}
+    return Piece_or
+
+  else:
+    return Piece_or 
+
+ else:
+
+  if inventory["Objet"]["perle"] == 7:
+    print("Villageois : Tu as réussi ! La légende est donc vrai, tu es notre sauveur ! Tiens tu mérites amplement ta récompense.")
+    print("Le villageois vous à donné 70 pièces")
+    Piece_or = Piece_or + 70
+    inventory["livre de quête"]["Quête collier"] = inventory["livre de quête"]["Quête collier"] - 1
+    return Piece_or
+
+  else:
+    print("Villageois : Tu n'as pas toutes les perles, rappel toi il t'en faut 7 pour avoir ta récompense.")
+    return Piece_or
+
+
+Menu(current_position, Vie, Mana, Armure, attaque_arc, attaque_epee, une_potion, x, y, Piece_or, degat_magique, level, XP, Barre_Xp, Vie_max, Mana_max)
